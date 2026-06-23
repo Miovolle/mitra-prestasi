@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $lomba->nama . ' - Mitra Prestasi')
+@section('title', $lomba->nama . ' - OMAH SINAU SEMAR')
 @section('content')
 <div style="padding-top:80px;min-height:100vh;background:#f8fafc;">
 <div class="container py-5">

@@ -8,7 +8,7 @@
     <meta name="keywords" content="lomba, kompetisi, prestasi, mahasiswa, pelajar">
     <meta name="author" content="Mitra Prestasi">
     
-    <title>@yield('title', 'Mitra Prestasi - Platform Kompetisi Edukatif')</title>
+    <title>@yield('title', 'OMAH SINAU SEMAR - Platform Kompetisi Edukatif')</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}">
