@@ -15,14 +15,19 @@ class Lomba extends Model
     ];
 
     protected $casts = [
-        'tanggal_mulai'    => 'date',
-        'tanggal_selesai'  => 'date',
-        'is_featured'      => 'boolean',
+        'tanggal_mulai'   => 'date',
+        'tanggal_selesai' => 'date',
+        'is_featured'     => 'boolean',
     ];
 
     public function pendaftaran()
     {
         return $this->hasMany(Pendaftaran::class);
+    }
+
+    public function getStatusFilterAttribute(): string
+    {
+        return $this->status ?? 'open';
     }
 
     public function getStatusLabelAttribute(): string

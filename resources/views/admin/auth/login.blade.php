@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin – Mitra Prestasi</title>
+    <title>Login Admin - Omah Sinau Semar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -11,7 +11,7 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #1e40af 100%);
+            background: linear-gradient(135deg, #052e16 0%, #16a34a 50%, #15803d 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -20,7 +20,6 @@
             overflow: hidden;
         }
 
-        /* Background orbs */
         body::before, body::after {
             content: '';
             position: fixed;
@@ -29,17 +28,17 @@
         }
         body::before {
             width: 500px; height: 500px;
-            background: #60a5fa;
+            background: #4ade80;
             top: -100px; right: -100px;
-            animation: float 8s ease-in-out infinite;
+            animation: floatOrb 8s ease-in-out infinite;
         }
         body::after {
             width: 400px; height: 400px;
-            background: #93c5fd;
+            background: #f59e0b;
             bottom: -80px; left: -80px;
-            animation: float 10s ease-in-out infinite reverse;
+            animation: floatOrb 10s ease-in-out infinite reverse;
         }
-        @keyframes float {
+        @keyframes floatOrb {
             0%, 100% { transform: translateY(0) scale(1); }
             50%       { transform: translateY(-20px) scale(1.05); }
         }
@@ -56,45 +55,52 @@
             animation: slideUp .5s ease;
         }
         @keyframes slideUp {
-            from { opacity:0; transform: translateY(30px); }
-            to   { opacity:1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .login-logo {
-            width: 72px; height: 72px;
-            background: linear-gradient(135deg, #2563eb, #1e40af);
+            width: 80px; height: 80px;
+            background: #ffffff;
             border-radius: 20px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 2rem; color: #fff;
             margin: 0 auto 1.5rem;
-            box-shadow: 0 8px 24px rgba(37,99,235,.4);
+            box-shadow: 0 8px 24px rgba(22,163,74,.3);
+            border: 2px solid #bbf7d0;
+            overflow: hidden;
+        }
+        .login-logo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
         }
 
         .login-title {
             font-size: 1.6rem;
-            font-weight: 800;
+            font-weight: 900;
             color: #1e293b;
             text-align: center;
             margin-bottom: .25rem;
         }
-
         .login-subtitle {
             text-align: center;
             color: #64748b;
-            font-size: .9rem;
+            font-size: .88rem;
             margin-bottom: 2rem;
+        }
+        .login-subtitle span {
+            color: #16a34a;
+            font-weight: 700;
         }
 
         .form-label {
-            font-weight: 600;
+            font-weight: 700;
             font-size: .85rem;
             color: #374151;
             margin-bottom: .4rem;
         }
 
-        .input-group-icon {
-            position: relative;
-        }
+        .input-group-icon { position: relative; }
         .input-group-icon .form-control {
             padding-left: 2.8rem;
             border-radius: 12px;
@@ -102,19 +108,19 @@
             height: 48px;
             font-size: .95rem;
             transition: .2s;
+            color: #1e293b;
         }
         .input-group-icon .form-control:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37,99,235,.1);
+            border-color: #16a34a;
+            box-shadow: 0 0 0 4px rgba(22,163,74,.12);
+            outline: none;
         }
-        .input-group-icon .form-control.is-invalid {
-            border-color: #ef4444;
-        }
+        .input-group-icon .form-control.is-invalid { border-color: #ef4444; }
         .input-group-icon .icon {
             position: absolute;
             left: .9rem; top: 50%;
             transform: translateY(-50%);
-            color: #94a3b8;
+            color: #16a34a;
             font-size: 1rem;
             z-index: 5;
         }
@@ -128,13 +134,14 @@
             background: none;
             border: none;
             padding: 0;
+            transition: color .2s;
         }
-        .input-group-icon .toggle-pw:hover { color: #2563eb; }
+        .input-group-icon .toggle-pw:hover { color: #16a34a; }
 
         .btn-login {
             width: 100%;
             height: 50px;
-            background: linear-gradient(135deg, #2563eb, #1e40af);
+            background: linear-gradient(135deg, #16a34a, #15803d);
             border: none;
             border-radius: 12px;
             color: #fff;
@@ -144,41 +151,56 @@
             margin-top: .5rem;
             transition: .2s;
             cursor: pointer;
+            box-shadow: 0 4px 16px rgba(22,163,74,.35);
         }
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37,99,235,.4);
+            box-shadow: 0 8px 24px rgba(22,163,74,.45);
         }
         .btn-login:active { transform: translateY(0); }
 
+        .divider {
+            display: flex; align-items: center; gap: 12px;
+            margin: 1.5rem 0 0;
+            color: #cbd5e1; font-size: .8rem;
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1;
+            height: 1px; background: #e2e8f0;
+        }
+
         .alert-danger {
-            border-radius: 12px;
-            font-size: .88rem;
-            border: none;
-            background: #fef2f2;
-            color: #b91c1c;
+            border-radius: 12px; font-size: .88rem;
+            border: none; background: #fef2f2; color: #b91c1c;
+            padding: 12px 16px;
         }
         .alert-success {
-            border-radius: 12px;
-            font-size: .88rem;
-            border: none;
-            background: #f0fdf4;
-            color: #15803d;
+            border-radius: 12px; font-size: .88rem;
+            border: none; background: #f0fdf4; color: #15803d;
+            padding: 12px 16px;
         }
 
         .back-link {
-            display: block;
-            text-align: center;
+            display: block; text-align: center;
             margin-top: 1.5rem;
-            color: rgba(255,255,255,.8);
-            text-decoration: none;
-            font-size: .88rem;
-            position: relative;
-            z-index: 10;
+            color: rgba(255,255,255,.85);
+            text-decoration: none; font-size: .88rem;
+            position: relative; z-index: 10;
+            transition: color .2s;
         }
         .back-link:hover { color: #fff; }
 
-        .invalid-feedback { font-size: .8rem; }
+        .invalid-feedback { font-size: .8rem; color: #ef4444; }
+
+        /* Gold accent bar at top of card */
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #16a34a, #f59e0b, #16a34a);
+            border-radius: 24px 24px 0 0;
+        }
     </style>
 </head>
 <body>
@@ -186,12 +208,12 @@
 <div>
     <div class="login-card">
         <div class="login-logo">
-            <i class="bi bi-trophy-fill"></i>
+            <img src="{{ asset('image/favlogo.png') }}" alt="Omah Sinau Semar"
+                 onerror="this.parentElement.innerHTML='<i class=\'bi bi-trophy-fill\' style=\'font-size:2rem;color:#16a34a;\'></i>'">
         </div>
         <h1 class="login-title">Admin Panel</h1>
-        <p class="login-subtitle">Mitra Prestasi — Masuk untuk melanjutkan</p>
+        <p class="login-subtitle"><span>Omah Sinau Semar</span> — Masuk untuk melanjutkan</p>
 
-        {{-- Alert error --}}
         @if(session('error'))
             <div class="alert alert-danger mb-3">
                 <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('error') }}
@@ -207,7 +229,6 @@
         <form action="{{ route('admin.login.post') }}" method="POST" novalidate>
             @csrf
 
-            {{-- Email --}}
             <div class="mb-3">
                 <label class="form-label">Email</label>
                 <div class="input-group-icon">
@@ -216,7 +237,7 @@
                         type="email"
                         name="email"
                         class="form-control @error('email') is-invalid @enderror"
-                        placeholder="admin@mitraprestasi.com"
+                        placeholder="admin@omahsinausemar.com"
                         value="{{ old('email') }}"
                         autofocus
                     >
@@ -226,7 +247,6 @@
                 </div>
             </div>
 
-            {{-- Password --}}
             <div class="mb-3">
                 <label class="form-label">Password</label>
                 <div class="input-group-icon">
@@ -251,6 +271,8 @@
                 <i class="bi bi-box-arrow-in-right me-2"></i>Masuk
             </button>
         </form>
+
+        <div class="divider">Omah Sinau Semar</div>
     </div>
 
     <a href="{{ url('/') }}" class="back-link">
