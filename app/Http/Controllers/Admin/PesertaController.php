@@ -39,7 +39,7 @@ class PesertaController extends Controller
         ]);
 
         Peserta::create($request->only([
-            'no_peserta','nama','asal_sekolah','mapel','tingkat','kelas','ruang'
+            'no_peserta','nama','asal_sekolah','mapel','tingkat','kelas','level'
         ]));
 
         return redirect()->route('admin.peserta.index')
@@ -62,7 +62,7 @@ class PesertaController extends Controller
         ]);
 
         $peserta->update($request->only([
-            'no_peserta','nama','asal_sekolah','mapel','tingkat','kelas','ruang'
+            'no_peserta','nama','asal_sekolah','mapel','tingkat','kelas','level'
         ]));
 
         return redirect()->route('admin.peserta.index')
@@ -141,13 +141,17 @@ class PesertaController extends Controller
                 $sekolahCol = array_search('ASAL SEKOLAH', $headers);
                 $mapelCol   = array_search('MAPEL', $headers);
                 $lvCol      = array_search('LV', $headers);
+<<<<<<< HEAD
                 $ruangVal   = null;
+=======
+                $levelVal   = null;
+>>>>>>> 74151a55aef741ed215048a6883428bf16fd4784
 
                 foreach ($rows as $row) {
                     foreach ($row as $cell) {
-                        if (str_contains(strtoupper((string)$cell), 'RUANG :') || str_contains(strtoupper((string)$cell), 'RUANG:')) {
-                            preg_match('/RUANG\s*:\s*(\d+)/i', (string)$cell, $m);
-                            $ruangVal = isset($m[1]) ? 'Ruang ' . $m[1] : null;
+                        if (str_contains(strtoupper((string)$cell), 'LEVEL :') || str_contains(strtoupper((string)$cell), 'LEVEL:')) {
+                            preg_match('/LEVEL\s*:\s*(\d+)/i', (string)$cell, $m);
+                            $levelVal = isset($m[1]) ? 'Level ' . $m[1] : null;
                         }
                     }
                 }
@@ -166,7 +170,11 @@ class PesertaController extends Controller
                             'asal_sekolah' => trim($row[$sekolahCol] ?? ''),
                             'mapel'        => trim($row[$mapelCol] ?? ''),
                             'tingkat'      => trim($row[$lvCol] ?? ''),
+<<<<<<< HEAD
                             'ruang'        => $ruangVal,
+=======
+                            'level'        => $levelVal,
+>>>>>>> 74151a55aef741ed215048a6883428bf16fd4784
                             'is_published' => false,
                         ]
                     );
