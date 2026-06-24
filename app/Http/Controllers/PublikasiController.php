@@ -37,7 +37,6 @@ class PublikasiController extends Controller
 
             $dariPendaftaran = Pendaftaran::with('lomba')
                 ->where('status', 'diterima')
-                ->where('payment_status', 'paid')
                 ->where('nama_peserta', 'like', '%' . $keyword . '%')
                 ->get()
                 ->map(function ($d) {

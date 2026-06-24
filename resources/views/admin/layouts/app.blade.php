@@ -265,6 +265,10 @@
            class="nav-link {{ request()->routeIs('admin.pendaftaran*') ? 'active' : '' }}">
             <i class="bi bi-people"></i> Pendaftaran
         </a>
+        <a href="{{ route('admin.peserta.index') }}"
+           class="nav-link {{ request()->routeIs('admin.peserta*') ? 'active' : '' }}">
+            <i class="bi bi-person-badge"></i> Peserta
+        </a>
         <a href="{{ route('admin.blog.index') }}"
            class="nav-link {{ request()->routeIs('admin.blog*') ? 'active' : '' }}">
             <i class="bi bi-journal-richtext"></i> Blog

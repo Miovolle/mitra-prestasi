@@ -9,13 +9,18 @@ class Peserta extends Model
     protected $table = 'peserta';
 
     protected $fillable = [
-        'no_peserta', 'nama', 'asal_sekolah',
+        'no_peserta', 'lomba_id', 'nama', 'asal_sekolah',
         'mapel', 'tingkat', 'kelas', 'ruang', 'is_published',
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
     ];
+
+    public function lomba()
+    {
+        return $this->belongsTo(Lomba::class);
+    }
 
     public function getTingkatLabelAttribute(): string
     {
@@ -25,12 +30,12 @@ class Peserta extends Model
     public function getMapelIconAttribute(): string
     {
         return match (strtolower($this->mapel)) {
-            'matematika'    => '🔢',
-            'bahasa inggris','b.inggris' => '🌍',
-            'sains'         => '🔬',
-            'ips'           => '🗺️',
-            'mewarnai'      => '🎨',
-            default         => '📚',
+            'matematika'                       => '🔢',
+            'bahasa inggris', 'b.inggris'      => '🌍',
+            'sains'                            => '🔬',
+            'ips'                              => '🗺️',
+            'mewarnai'                         => '🎨',
+            default                            => '📚',
         };
     }
 }
