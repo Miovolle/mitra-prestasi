@@ -30,36 +30,38 @@ class PendaftaranController extends Controller
 
     public function show(Pendaftaran $pendaftaran)
     {
-        // ===== PESAN 1: STATUS PENDAFTARAN =====
-        $pesanStatus = urlencode(
-            "Halo *{$pendaftaran->nama_peserta}*! 👋\n\n" .
-            "Kami dari *Omah Sinau Semar* ingin menginformasikan bahwa pendaftaran Anda untuk lomba:\n" .
-            "*{$pendaftaran->lomba->nama}*\n\n" .
-            "Status: *{$pendaftaran->status_label}*\n\n" .
-            "Terima kasih telah mendaftar! 🏆"
-        );
+        // Konversi nomor HP ke format internasional
+        $noHp = preg_replace('/[^0-9]/', '', $pendaftaran->no_hp);
+        if (str_starts_with($noHp, '0')) {
+            $noHp = '62' . substr($noHp, 1);
+        } elseif (!str_starts_with($noHp, '62')) {
+            $noHp = '62' . $noHp;
+        }
 
-        // ===== PESAN 2: PEMBAYARAN =====
-        $pesanBayar = urlencode(
-            "Halo *{$pendaftaran->nama_peserta}*! 👋\n\n" .
-            "Terima kasih telah mendaftar di *Omah Sinau Semar* untuk lomba:\n" .
-            "*{$pendaftaran->lomba->nama}*\n\n" .
-            "📋 *DATA PENDAFTARAN:*\n" .
-            "Nama: *{$pendaftaran->nama_peserta}*\n" .
-            "Sekolah: *{$pendaftaran->asal_sekolah}*\n\n" .
-            "💰 *SILAHKAN LAKUKAN PEMBAYARAN*\n" .
-            "Hubungi admin untuk detail pembayaran dan nomor rekening.\n\n" .
-            "Terima kasih! ❤️"
-        );
+        if ($pendaftaran->status === 'menunggu') {
+            $pesan = urlencode(
+                "Halo *{$pendaftaran->nama_peserta}*! 👋\n\n" .
+                "Kami dari *Omah Sinau Semar* ingin menginformasikan bahwa pendaftaran Anda untuk lomba:\n" .
+                "*{$pendaftaran->lomba->nama}*\n\n" .
+                "Status: *{$pendaftaran->status_label}*\n\n" .
+                "Untuk melanjutkan, silahkan lakukan pembayaran ke:\n\n" .
+                "*Rekening BRI:* 1240420607\n" .
+                "a.n *TIMOTIUS PURNO RIBOWO*\n\n" .
+                "Agar pendaftaran dapat diproses lebih lanjut. 🙏"
+            );
+        } else {
+            $pesan = urlencode(
+                "Halo *{$pendaftaran->nama_peserta}*! 👋\n\n" .
+                "Kami dari *Omah Sinau Semar* ingin menginformasikan bahwa pendaftaran Anda untuk lomba:\n" .
+                "*{$pendaftaran->lomba->nama}*\n\n" .
+                "Status: *{$pendaftaran->status_label}*\n\n" .
+                "Terima kasih telah mendaftar! 🏆"
+            );
+        }
 
-        // Format nomor WA (0812... → 62812...)
-        $noHp = preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $pendaftaran->no_hp));
+        $waLink = "https://wa.me/{$noHp}?text={$pesan}";
 
-        // Generate WA links
-        $waLinkStatus = "https://wa.me/{$noHp}?text={$pesanStatus}";
-        $waLinkBayar = "https://wa.me/{$noHp}?text={$pesanBayar}";
-
-        return view('admin.pendaftaran.show', compact('pendaftaran', 'waLinkStatus', 'waLinkBayar'));
+        return view('admin.pendaftaran.show', compact('pendaftaran', 'waLink'));
     }
 
     public function updateStatus(Request $request, Pendaftaran $pendaftaran)
@@ -77,8 +79,8 @@ class PendaftaranController extends Controller
 
     public function export(Request $request)
     {
-        $lomba_id  = $request->lomba_id ?? null;
-        $namaFile  = 'pendaftaran-' . now()->format('d-m-Y') . '.xlsx';
+        $lomba_id = $request->lomba_id ?? null;
+        $namaFile = 'pendaftaran-' . now()->format('d-m-Y') . '.xlsx';
         return Excel::download(new PendaftaranExport($lomba_id), $namaFile);
     }
 }
