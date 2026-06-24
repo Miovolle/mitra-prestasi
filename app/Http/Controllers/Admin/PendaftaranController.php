@@ -45,7 +45,7 @@ class PendaftaranController extends Controller
                 "*{$pendaftaran->lomba->nama}*\n\n" .
                 "Status: *{$pendaftaran->status_label}*\n\n" .
                 "Untuk melanjutkan, silahkan lakukan pembayaran ke:\n\n" .
-                "*Rekening BRI:* 1240420607\n" .
+                "*Rekening BCA:* 1240420607\n" .
                 "a.n *TIMOTIUS PURNO RIBOWO*\n\n" .
                 "Agar pendaftaran dapat diproses lebih lanjut. 🙏"
             );

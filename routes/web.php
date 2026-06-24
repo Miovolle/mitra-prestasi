@@ -13,9 +13,7 @@ Route::get('/lomba/{lomba}', [LombaController::class, 'show'])->name('lomba.show
 Route::post('/lomba/{lomba}/daftar', [LombaController::class, 'daftar'])->name('lomba.daftar');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/publikasi', [\App\Http\Controllers\PublikasiController::class, 'index'])->name('publikasi.index');
-
 Route::get('/blog/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
-
 
 // ── PAYMENT ────────────────────────────────────────────────────────────
 Route::get('/payment/{pendaftaran}/pay', [\App\Http\Controllers\PaymentController::class, 'pay'])->name('payment.pay');
@@ -53,6 +51,8 @@ Route::prefix('admin')->name('admin.')->middleware(AdminAuth::class)->group(func
     Route::post('peserta/import', [Admin\PesertaController::class, 'import'])->name('peserta.import');
     Route::post('peserta/publish-all', [Admin\PesertaController::class, 'publishAll'])->name('peserta.publish-all');
     Route::post('peserta/unpublish-all', [Admin\PesertaController::class, 'unpublishAll'])->name('peserta.unpublish-all');
+    Route::delete('peserta/destroy-all', [Admin\PesertaController::class, 'destroyAll'])->name('peserta.destroy-all');
+    Route::delete('peserta/destroy-selected', [Admin\PesertaController::class, 'destroySelected'])->name('peserta.destroy-selected');
     Route::resource('peserta', Admin\PesertaController::class, ['parameters' => ['peserta' => 'peserta']]);
 
     // Galeri
